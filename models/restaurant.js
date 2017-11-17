@@ -6,13 +6,19 @@ var users = require('./user');
 // NOTE schema here
 var noteSchema = new Schema({
   content: { type: String, required: true },
-  user_id: { type: Schema.Types.ObjectId, ref: 'User'}
-})
+  user: { type: Schema.Types.ObjectId, ref: 'User'}
+});
 
 
 var restaurantSchema = new Schema({
-  favorite: { type: Boolean, default: false },
+  yelpId: String,
+  name: String,
+  city: String,
+  address: String,
+  categories: [String],
+  rating: Number,
+  reviewCount: Number,
   notes: [noteSchema]
-})
+});
 
 module.exports = mongoose.model('Restaurant', restaurantSchema);
