@@ -21,4 +21,8 @@ var restaurantSchema = new Schema({
   notes: [noteSchema]
 });
 
+<<<<<<< HEAD
 module.exports = mongoose.model('Restaurant', restaurantSchema);
+=======
+module.exports = mongoose.model('Restaurant', restaurantSchema);
+>>>>>>> master
