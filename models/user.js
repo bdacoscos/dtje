@@ -5,7 +5,7 @@ var restaurants = require('./restaurant');
 
 var userSchema = new Schema({
   address: String,
-  favorites: { type: Schema.Types.ObjectId, ref: 'Restaurant' }
+  favorites: [{ type: Schema.Types.ObjectId, ref: 'Restaurant' }]
 })
 
 module.exports = mongoose.model('User', userSchema);
