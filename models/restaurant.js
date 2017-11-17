@@ -11,8 +11,8 @@ var noteSchema = new Schema({
 
 
 var restaurantSchema = new Schema({
-  favorite: Boolean,
+  favorite: { type: Boolean, default: false },
   notes: [noteSchema]
 })
 
-module.exports = mongoose.model('Resturant', restaurantSchema);
+module.exports = mongoose.model('Restaurant', restaurantSchema);
