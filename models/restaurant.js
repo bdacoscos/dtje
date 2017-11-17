@@ -15,4 +15,4 @@ var restaurantSchema = new Schema({
   notes: [noteSchema]
 })
 
-module.exports = mongoose.model('Resturant', restaurantSchema);
+module.exports = mongoose.model('Restaurant', restaurantSchema);
