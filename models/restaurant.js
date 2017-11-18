@@ -3,7 +3,6 @@ var Schema = mongoose.Schema;
 
 var users = require('./user');
 
-// NOTE schema here
 var noteSchema = new Schema({
   content: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User'}
