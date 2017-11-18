@@ -8,10 +8,9 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
-var underscore = require('underscore');
 var cors = require('cors');
 
-var restaurants = require('./routes/restaurants');
+var index = require('./routes/index');
 var users = require('./routes/users');
 require('dotenv').config();
 
@@ -42,7 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use('/', restaurants);
+app.use('/', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
