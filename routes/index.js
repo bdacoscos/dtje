@@ -26,7 +26,7 @@ router.post('/show', function(req, res) {
   };
   request(options, function (err, response, body) {
     var restaurantData = JSON.parse(body);
-    res.render('show', { restaurantData });
+    res.render('show', { restaurantData, user: req.user });
     console.log(restaurantData);
   });
 });

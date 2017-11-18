@@ -26,6 +26,24 @@
             <% } %>
     </ul>
 
+    <p>
+    <% if (restaurantData) { %> 
+        <%= restaurantData.businesses[0].name %>
+        <% restaurantData.businesses[0].categories.forEach(function(category) { %>
+            <%=  category.title %> 
+            <% }); %> 
+        <%= restaurantData.businesses[0].price %>
+        <%= restaurantData.businesses[0].rating %>
+        <img src=<%=restaurantData.businesses[0].image_url%>>
+        
+    <% } %> 
+    </p>
+
+<!-- 
+    <% restaurantData.businesses.forEach(function(restaurant) { %> 
+        <%= restaurant.name %>  
+    <% }); %>  -->
+
     <!-- jQuery (required by Materialize) -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <!-- Using Underscore for collection manipulation and client-side templatin -->
