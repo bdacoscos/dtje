@@ -18,8 +18,9 @@ router.get('/show', function(req, res, next) {
 
 
 router.post('/show', function(req, res) {
+  console.log('ASDFDF:' + req.body.location)
   var options = {
-    url: `${rootURL}?=restaurant&location=boulder`,
+    url: `${rootURL}?=restaurant&location=${req.body.location}`,
     headers: {
       'Authorization': 'Bearer ' + process.env.access_token
     }
