@@ -26,18 +26,17 @@
             <% } %>
     </ul>
 
-    <p>
-    <% if (restaurantData) { %> 
-        <%= restaurantData.businesses[0].name %>
-        <% restaurantData.businesses[0].categories.forEach(function(category) { %>
-            <%=  category.title %> 
-            <% }); %> 
-        <%= restaurantData.businesses[0].price %>
-        <%= restaurantData.businesses[0].rating %>
-        <img src=<%=restaurantData.businesses[0].image_url%>>
-        
-    <% } %> 
-    </p>
+    <div>
+        <% if (restaurantData) { %> 
+            <% restaurantData.businesses.forEach(function(biz) { %>
+                <%= biz.name %>
+                <%= biz.categories[0].title %>
+                <%= biz.price %>
+                <%= biz.rating %>
+                <img src=<%= biz.image_url %> height="50">
+            <% }); %>
+        <% } %> 
+    </div>
 
 <!-- 
     <% restaurantData.businesses.forEach(function(restaurant) { %> 
