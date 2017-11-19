@@ -18,17 +18,18 @@ router.get('/show', function(req, res, next) {
 
 
 router.post('/show', function(req, res) {
-  console.log('ASDFDF:' + req.body.location)
   var options = {
-    url: `${rootURL}?=restaurant&location=${req.body.location}`,
+    url: `${rootURL}?=restaurant&radius=1610&location=${req.body.location}`,
     headers: {
       'Authorization': 'Bearer ' + process.env.access_token
     }
   };
   request(options, function (err, response, body) {
     var restaurantData = JSON.parse(body);
+    if (restaurantData.total === undefined) {
+      res.render('index', { user: req.user })
+    }
     res.render('show', { restaurantData, user: req.user });
-    console.log(restaurantData);
   });
 });
 
