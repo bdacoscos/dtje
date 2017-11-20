@@ -2,37 +2,18 @@ var express = require('express');
 var router = express.Router();
 var request = require('request'); 
 var passport = require('passport');
+var yelp = require('./../utilities/yelp');
 
 const rootURL = 'https://api.yelp.com/v3/businesses/search'
 var restaurantsController = require('../controllers/restaurantsController');
-
 
 
 router.get('/', function(req, res, next) {
   res.render('index', {user: req.user});
 });
 
-router.get('/show', function(req, res, next) {
-  res.render('show', {user: req.user});
-});
-
-
-router.post('/show', function(req, res) {
-  var options = {
-    url: `${rootURL}?=restaurant&radius=1610&location=${req.body.location}`,
-    headers: {
-      'Authorization': 'Bearer ' + process.env.access_token
-    }
-  };
-  request(options, function (err, response, body) {
-    var restaurantData = JSON.parse(body);
-    if (restaurantData.total === undefined) {
-      res.render('index', { user: req.user })
-    }
-    res.render('show', { restaurantData, user: req.user });
-  });
-});
-
+router.get('/show', restaurantsController.show);
+router.post('/show', yelp.searchRestaurant);
 
 router.get('/auth/google', passport.authenticate(
   'google',
@@ -51,17 +32,6 @@ router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
-
-
-// router.post('/', function(req, res) {
-//   request(
-//     rootURL + '' + req.body + 
-//       '?Bearer ' + process.env.access_token,
-//     function(err, response, body) {
-//       res.render('index', {restaurant: body});
-//     }
-//   );
-// });
 
 
 module.exports = router;

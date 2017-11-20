@@ -8,7 +8,6 @@ var noteSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User'}
 });
 
-
 var restaurantSchema = new Schema({
   yelpId: String,
   name: String,
