@@ -11,7 +11,8 @@ var yelp = require('../utilities/yelp');
 function show(req, res, next) {
     var location = req.body.location || req.query.location || "90057";
     yelp.randomRestaurant(location).then(function(restaurant) {
-        res.render('show', { user: req.user, restaurant, location });
+        // console.log(restaurant.id);
+         res.render('show', { user: req.user, restaurant, location });
     });
 }
 
