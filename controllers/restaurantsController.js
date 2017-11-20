@@ -7,19 +7,11 @@ var Restaurant = ('./models/restaurant');
 //     // });
 // }
 
-
-function index (req,res){
-    // var options = {
-    //     url: "https://api.yelp.com/v3/businesses/search?term=restaurant&location=boulder",
-    //     headers: {
-    //       'Authorization': 'Bearer ' + process.env.access_token
-    //     }
-    //   };
-    res.redirect('index');
-        
-};
+function show(req, res, next) {
+    res.render('show', { user: req.user });
+}
 
 
 module.exports = {
-    index, 
+    show
 }
