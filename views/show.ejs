@@ -25,12 +25,16 @@
             <% } %>
     </ul>
 
+<div>
+    <a href="/show?location=<%= location %>">TRY AGAIN</a>
+</div>
+
     <div>
-                <%= random.name %>
-                <%= random.categories[0].title %>
-                <%= random.price %>
-                <%= random.rating %>
-                <img src=<%= random.image_url %> height="50">
+                <%= restaurant.name %>
+                <%= restaurant.categories[0].title %>
+                <%= restaurant.price %>
+                <%= restaurant.rating %>
+                <img src=<%= restaurant.image_url %> height="50">
     </div>
 
     <!-- jQuery (required by Materialize) -->

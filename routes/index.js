@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/show', restaurantsController.show);
-router.post('/show', yelp.searchRestaurant);
+router.post('/show', restaurantsController.show);
 
 router.get('/auth/google', passport.authenticate(
   'google',
