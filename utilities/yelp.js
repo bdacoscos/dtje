@@ -3,7 +3,7 @@ const rootURL = 'https://api.yelp.com/v3/businesses/search';
 
 function searchRestaurants(location) {
   var options = {
-    url: `${rootURL}?=restaurant&radius=1610&location=${location}`,
+    url: `${rootURL}?term=restaurant&radius=1610&location=${location}`,
     headers: {
       'Authorization': 'Bearer ' + process.env.access_token
     }
@@ -18,6 +18,20 @@ function randomRestaurant(location) {
     return restaurants[Math.floor(Math.random() * restaurants.length)];
   });
 }
+
+
+// function getReviews(restaurant){
+//   var options = {
+//     url: `${reviewURL}/${restaurant.id}/reviews`,
+//     headers: {
+//       'Authorization': 'Bearer ' + process.env.access_token
+//     }
+//   }
+//   return request(options).then(function(restaurantData){
+//     console.log(JSON.parse(restaurantData));
+//     return JSON.parse(restaurantData);
+//   });  
+// };
 
 module.exports = {
   searchRestaurants,

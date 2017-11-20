@@ -30,10 +30,11 @@
 </div>
 
     <div>
-                <%= restaurant.name %>
-                <%= restaurant.categories[0].title %>
-                <%= restaurant.price %>
-                <%= restaurant.rating %>
+                <%= restaurant.name %></br>
+                <%= restaurant.categories[0].title %></br> 
+                <%= restaurant.price %></br> 
+                <%= restaurant.rating %></br> 
+                <%= restaurant.location.display_address.join(", ") %> </br> 
                 <img src=<%= restaurant.image_url %> height="50">
     </div>
 
