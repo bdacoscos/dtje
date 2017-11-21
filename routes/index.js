@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 router.get('/show', restaurantsController.show);
 router.post('/show', restaurantsController.show);
 
-router.put('/restaurants/:yelpId/like', restaurantsController.like);
+router.post('/restaurants/:yelpId/like', restaurantsController.like);
 
 router.get('/favorites', restaurantsController.favorites); 
 

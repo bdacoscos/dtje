@@ -38,8 +38,10 @@
                 <img src=<%= restaurant.image_url %> height="50">
     </div>
 
-    <!-- <form action="" method="put">
-    </form> -->
+    <form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
+        <button type="submit">Like dis food shit</button>
+    </form>
+
 
     <!-- jQuery (required by Materialize) -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

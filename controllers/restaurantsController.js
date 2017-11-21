@@ -11,20 +11,19 @@ var yelp = require('../utilities/yelp');
 function show(req, res, next) {
     var location = req.body.location || req.query.location || "90057";
     yelp.randomRestaurant(location).then(function(restaurant) {
-        console.log(req.user);
          res.render('show', { user: req.user, restaurant, location });
     });
 }
 
 function like(req, res) {
-    (Restaurant.findOne({yelpId: req.params.yelpId}, function(err, restaurant){
+    Restaurant.findOne({yelpId: req.params.yelpId}, function(err, restaurant){
         if (restaurant) {
             req.user.favorites.push(restaurant._id);
             var savePromise = req.user.save(); 
         } else {
-            getRestaurantById(req.params.yelpId).then(function(rest) {
+            yelp.getRestaurantById(req.params.yelpId).then(function(rest) {
                 Restaurant.create({
-                    yelpId: rest.id,
+                    yelpId: rest.id, 
                     name: rest.name,
                     address: rest.display_address,
                     categories: rest.categories,
@@ -39,7 +38,7 @@ function like(req, res) {
         savePromise.then(function(){
             res.redirect('/favorites')
         });
-    }));
+    });
 } 
 
 

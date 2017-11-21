@@ -9,6 +9,11 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
 var cors = require('cors');
+var methodOverride = require('method-override'); 
+
+
+
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -39,8 +44,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
+app.use(methodOverride('_method', {methods: ['PUT']}));
 app.use('/', index);
 app.use('/users', users);
 
