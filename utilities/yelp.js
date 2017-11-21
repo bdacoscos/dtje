@@ -1,6 +1,6 @@
 var request = require('request-promise-native'); 
 const rootURL = 'https://api.yelp.com/v3/businesses/search';
-const matchURL = 'https://api.yelp.com/v3/businesses/';
+const matchURL = 'https://api.yelp.com/v3/businesses';
 
 function searchRestaurants(location) {
   var options = {
@@ -23,11 +23,12 @@ function randomRestaurant(location) {
 
 function getRestaurantById(yelpId){
   var options = {
-    url: `${matchURL}/yelpId`,
+    url: `${matchURL}/${yelpId}`,
     headers: {
       'Authorization': 'Bearer ' + process.env.access_token
     }
   };
+  console.log(options);
   return request(options).then(function(restaurant) {
     return JSON.parse(restaurant); 
   });
@@ -48,5 +49,6 @@ function getRestaurantById(yelpId){
 
 module.exports = {
   searchRestaurants,
-  randomRestaurant
+  randomRestaurant,
+  getRestaurantById
 }
