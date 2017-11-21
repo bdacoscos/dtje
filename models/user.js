@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
 var restaurants = require('./restaurant');
 
 var userSchema = new Schema({

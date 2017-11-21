@@ -7,6 +7,21 @@
     <!-- Materialize CSS Framework -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+          height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+      </style>
 </head>
 <body>
     <a href="/" class="brand-logo left">Don't Think, Just Eat</a>
@@ -35,11 +50,28 @@
                 <%= restaurant.price %></br> 
                 <%= restaurant.rating %></br> 
                 <%= restaurant.location.display_address.join(", ") %> </br> 
-                <img src=<%= restaurant.image_url %> height="50">
+                <img src=<%= restaurant.image_url %> height="80">
     </div>
 
+ 
+      <div id="map"></div>
+      <script>
+        function initMap() {
+          var thisPlace = {lat: <%= restaurant.coordinates.latitude %>, lng: <%= restaurant.coordinates.longitude %>}
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: thisPlace,
+            zoom: 18
+          });
+          var marker = new google.maps.Marker({
+              position: thisPlace, 
+              map
+          })
+        }
+      </script>
+
+
     <form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
-        <button type="submit">Like dis food shit</button>
+        <button type="submit">Like</button>
     </form>
 
 
@@ -50,6 +82,8 @@
     <!-- JavaScript for Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script src="javascripts/app.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&callback=initMap"
+    async defer></script>
 </body>
 
 </html>

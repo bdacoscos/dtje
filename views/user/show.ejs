@@ -11,6 +11,25 @@
   <%= user.name %>
   <img src=<%=user.avatar %>>
   <%= user.location %>
-  <%= user.favorites %>
+ <% user.favorites.forEach(function(restaurant) { %> 
+  <div>
+    <%= restaurant.name %></br>
+    <%= restaurant.categories[0].title %></br> 
+    <%= restaurant.price %></br> 
+    <%= restaurant.rating %></br> 
+    <%= restaurant.location.display_address.join(", ") %> </br> 
+    <img src=<%= restaurant.image_url %> height="80">
+ <% }); %> 
+  </div> 
+
+
+
+
+
+
+  <form method="POST" action='/restaurants/<%= restaurant.id %>/?_method=DELETE'>
+    <button type="submit">Unlike</button>
+
+</form>
 </body>
 </html>
