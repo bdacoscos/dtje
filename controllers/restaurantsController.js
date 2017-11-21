@@ -19,27 +19,28 @@ function like(req, res) {
     Restaurant.findOne({yelpId: req.params.yelpId}, function(err, restaurant){
         if (restaurant) {
             req.user.favorites.push(restaurant._id);
-            var savePromise = req.user.save(); 
+            req.user.save(function(err) {
+                res.redirect('/favorites')
+            }); 
         } else {
             yelp.getRestaurantById(req.params.yelpId).then(function(rest) {
                 Restaurant.create({
                     yelpId: rest.id, 
                     name: rest.name,
-                    address: rest.display_address,
-                    categories: rest.categories,
+                    address: rest.location.display_address.join(', '),
+                    categories: rest.categories.map(cat => cat.title),
                     rating: rest.rating,
                     reviewCount: rest.review_count,
-                }, function(restDoc){
+                }, function(err, restDoc){
                     req.user.favorites.push(restDoc._id); 
-                    var savePromise = req.user.save();                    
+                    req.user.save(function(err) {
+                        res.redirect('/favorites')
+                    }); 
                 });
             });
         }
-        savePromise.then(function(){
-            res.redirect('/favorites')
-        });
     });
-} 
+}
 
 
 function favorites(req, res) { 
