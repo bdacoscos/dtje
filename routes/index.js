@@ -20,6 +20,9 @@ router.post('/restaurants/:yelpId/like', restaurantsController.like);
 
 router.get('/favorites', restaurantsController.favorites); 
 
+router.delete('/restaurants/:id/unlike', restaurantsController.unlike);
+
+
 
 
 
