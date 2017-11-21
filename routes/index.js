@@ -8,24 +8,17 @@ const reviewURL = 'https://api.yelp.com/v3/businesses'
 const rootURL = 'https://api.yelp.com/v3/businesses/search'
 var restaurantsController = require('../controllers/restaurantsController');
 
-
+// landing page:
 router.get('/', function(req, res, next) {
   res.render('index', {user: req.user});
 });
 
 router.get('/show', restaurantsController.show);
 router.post('/show', restaurantsController.show);
-
-router.post('/restaurants/:yelpId/like', restaurantsController.like);
-
 router.get('/favorites', restaurantsController.favorites); 
 
+router.post('/restaurants/:yelpId/like', restaurantsController.like);
 router.delete('/restaurants/:id/unlike', restaurantsController.unlike);
-
-
-
-
-
 
 
 /* Google OAuth */ 

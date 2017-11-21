@@ -53,6 +53,9 @@
                 <img src=<%= restaurant.image_url %> height="80">
     </div>
 
+    <form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
+        <button type="submit">Like</button>
+    </form>
  
       <div id="map"></div>
       <script>
@@ -70,9 +73,6 @@
       </script>
 
 
-    <form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
-        <button type="submit">Like</button>
-    </form>
 
 
     <!-- jQuery (required by Materialize) -->

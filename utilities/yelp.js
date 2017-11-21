@@ -28,24 +28,11 @@ function getRestaurantById(yelpId){
       'Authorization': 'Bearer ' + process.env.access_token
     }
   };
-  console.log(options);
   return request(options).then(function(restaurant) {
     return JSON.parse(restaurant); 
   });
 }
 
-// function getReviews(restaurant){
-//   var options = {
-//     url: `${reviewURL}/${restaurant.id}/reviews`,
-//     headers: {
-//       'Authorization': 'Bearer ' + process.env.access_token
-//     }
-//   }
-//   return request(options).then(function(restaurantData){
-//     console.log(JSON.parse(restaurantData));
-//     return JSON.parse(restaurantData);
-//   });  
-// };
 
 module.exports = {
   searchRestaurants,

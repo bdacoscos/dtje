@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>User Show Page</h1>
+
+  <%= user.name %>
+  <img src=<%=user.avatar %>>
+  
+  <div>  
+    <% user.favorites.forEach(function(restaurant) { %> 
+      <%= restaurant._id %>
+        <%= restaurant.name %></br>
+        <%= restaurant.categories %></br> 
+        <%= restaurant.price %></br> 
+        <%= restaurant.rating %></br> 
+        <img src=<%= restaurant.image_url %>>
+        <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
+          <button type="submit">Unlike</button>
+        </form>
+    <% }); %> 
+  </div> 
+
+
+
+
+
+
+</body>
+</html>
