@@ -2,18 +2,11 @@ var Restaurant = require('../models/restaurant');
 var User = require('../models/user');
 var yelp = require('../utilities/yelp');
 
-// function index (req,res){
-//     // Restaurant.findById({yelpId}, function(err, restaurant){
-//     //     if (err) return res.status(err.statusCode || 500).json(err);
-//     //     res.json(restaurant);
-//     // });
-// }
 
 function show(req, res, next) {
   var location = req.body.location || req.query.location || "90057";
   yelp.randomRestaurant(location).then(function(restaurant) {
     res.render('show', { user: req.user, restaurant, location, mapKey: process.env.GOOGLE_MAPS });
-    console.log(restaurant); 
   });
 }
 
@@ -36,7 +29,6 @@ function like(req, res) {
           reviewCount: rest.review_count,
         }, function(err, restDoc){
           req.user.favorites.push(restDoc._id); 
-          console.log(restDoc);
           req.user.save(function(err) {
             res.redirect('/favorites')
           }); 
@@ -46,20 +38,16 @@ function like(req, res) {
   });
 }
 
-
-
 function unlike(req, res){
   req.user.favorites.remove(req.params.id);
-  req.user.save(function(err, data) {
-    res.render('user/favorites', {data}); 
+  req.user.save(function(err, user) {
+    res.redirect('/favorites'); 
   })
-  }; 
+}
 
-
-function favorites(req, res) { 
+function favorites(req, res) {
   req.user.populate('favorites', function(err, user) {
-    console.log(user);
-    res.render('user/favorites', {user}); 
+    res.render('users/favorites', { user }); 
   });
 }
 

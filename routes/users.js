@@ -5,10 +5,4 @@ var request = require('request');
 var passport = require('passport');
 
 
-/* GET users listing. */
-router.get('/show', user.show)
-
-
-
-
 module.exports = router;
