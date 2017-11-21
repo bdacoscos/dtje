@@ -17,7 +17,7 @@ function searchRestaurants(location) {
 function randomRestaurant(location) {
   return searchRestaurants(location).then(function(restaurants) {
     return restaurants[Math.floor(Math.random() * restaurants.length)];
-  });
+ });
 }
 
 
