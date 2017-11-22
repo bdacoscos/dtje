@@ -13,7 +13,7 @@
   <img src=<%=user.avatar %>>
   <%= user.location %>
     <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
-      <input type="text" name="location">
+      <input type="text" name="location" value="<%= user.location %>">
       <button type="submit">Update Location</button>
     </form>
   
@@ -27,7 +27,7 @@
         <% if (restaurant.notes.length > 0) { %>
           <%= restaurant.notes[0].content %></br> 
         <% } %> 
-        <img src=<%= restaurant.image %>>
+        <img src="<%= restaurant.image %>">
         <form method="POST" action='/favorites/<%= restaurant.id %>'>
           <input type="text" name="content">
           <button type="submit">Add Note</button>
@@ -35,7 +35,7 @@
         <div>
           <% restaurant.notes.forEach(function(note) { %>
             <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
-              <input type="text" name="content" value=<%= note.content %>>
+              <input type="text" name="content" value="<%= note.content %>">
               <button type="submit">Update Note</button>
             </form>
             <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
@@ -43,18 +43,11 @@
             </form>
           <% }); %>
         </div>
-        
         <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
           <button type="submit">Unlike</button>
         </form>
       </div>  
     <% }); %> 
   </div> 
-
-
-
-
-
-
 </body>
 </html>
