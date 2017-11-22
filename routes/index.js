@@ -16,13 +16,11 @@ router.get('/', function(req, res, next) {
 router.get('/show', restaurantsController.show);
 router.post('/show', restaurantsController.show);
 router.get('/favorites', restaurantsController.favorites);
-
 router.post('/restaurants/:yelpId/like', restaurantsController.like);
 router.delete('/restaurants/:id/unlike', restaurantsController.unlike);
 router.post('/favorites/:id', restaurantsController.postNote);
-router.delete('/favorites/:restId/notes/:noteId', restaurantsController.deleteNote);
 router.put('/favorites/:restId/notes/:noteId', restaurantsController.updateNote);
-
+router.delete('/favorites/:restId/notes/:noteId', restaurantsController.deleteNote);
 
 /* Google OAuth */ 
 router.get('/auth/google', passport.authenticate(
@@ -38,10 +36,9 @@ router.get('/oauth2callback', passport.authenticate(
   }
 ));
 
-router.get('/logout', function(req, res){
+router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
-
 
 module.exports = router;

@@ -1,3 +1,4 @@
+//delete what we don't need
 var express = require('express');
 var router = express.Router();
 var usersController = require('../controllers/usersController');
