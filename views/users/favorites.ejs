@@ -1,53 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <h1>User Show Page</h1>
+<%- include('../_partials/header') %>
 
-  <%= user.name %>
-  <img src=<%=user.avatar %>>
-  <%= user.location %>
-    <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
-      <input type="text" name="location" value="<%= user.location %>">
-      <button type="submit">Update Location</button>
-    </form>
-  
-  <div>  
-    <% user.favorites.forEach(function(restaurant) { %> 
-      <div class="container"></div>
-        <%= restaurant.name %></br>
-        <%= restaurant.categories.join(', ') %></br> 
-        <%= restaurant.price %></br> 
-        <%= restaurant.rating %></br> 
-        <% if (restaurant.notes.length > 0) { %>
-          <%= restaurant.notes[0].content %></br> 
-        <% } %> 
-        <img src="<%= restaurant.image %>">
-        <form method="POST" action='/favorites/<%= restaurant.id %>'>
-          <input type="text" name="content">
-          <button type="submit">Add Note</button>
-        </form>
-        <div>
-          <% restaurant.notes.forEach(function(note) { %>
-            <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
-              <input type="text" name="content" value="<%= note.content %>">
-              <button type="submit">Update Note</button>
-            </form>
-            <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
-              <button type="submit">Delete Note</button>
-            </form>
-          <% }); %>
-        </div>
-        <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
-          <button type="submit">Unlike</button>
-        </form>
-      </div>  
-    <% }); %> 
-  </div> 
-</body>
-</html>
+<h1>User Show Page</h1>
+
+<%= user.name %>
+<img src=<%=user.avatar %>>
+<%= user.location %>
+  <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
+    <input type="text" name="location" value="<%= user.location %>">
+    <button type="submit">Update Location</button>
+  </form>
+
+<div>  
+  <% user.favorites.forEach(function(restaurant) { %> 
+    <div class="container"></div>
+      <%= restaurant.name %></br>
+      <%= restaurant.categories.join(', ') %></br> 
+      <%= restaurant.price %></br> 
+      <%= restaurant.rating %></br> 
+      <% if (restaurant.notes.length > 0) { %>
+        <%= restaurant.notes[0].content %></br> 
+      <% } %> 
+      <img src="<%= restaurant.image %>">
+      <form method="POST" action='/favorites/<%= restaurant.id %>'>
+        <input type="text" name="content">
+        <button type="submit">Add Note</button>
+      </form>
+      <div>
+        <% restaurant.notes.forEach(function(note) { %>
+          <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
+            <input type="text" name="content" value="<%= note.content %>">
+            <button type="submit">Update Note</button>
+          </form>
+          <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
+            <button type="submit">Delete Note</button>
+          </form>
+        <% }); %>
+      </div>
+      <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
+        <button type="submit">Unlike</button>
+      </form>
+    </div>  
+  <% }); %> 
+</div> 
+
+
+<div id="map"></div>
+
+
+<%- include('../_partials/footer') %>
