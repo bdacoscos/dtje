@@ -11,6 +11,7 @@ var noteSchema = new Schema({
 var restaurantSchema = new Schema({
   yelpId: String,
   name: String,
+  image: String,
   address: String,
   categories: [String],
   rating: Number,
