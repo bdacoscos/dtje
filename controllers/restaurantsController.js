@@ -4,6 +4,7 @@ var yelp = require('../utilities/yelp');
 
 
 function show(req, res, next) {
+  console.log(req.user);
   var location = req.body.location || req.query.location || "90057";
   yelp.randomRestaurant(location).then(function(restaurant) {
     res.render('show', { user: req.user, restaurant, location, mapKey: process.env.GOOGLE_MAPS });
@@ -22,6 +23,7 @@ function like(req, res) {
         Restaurant.create({
           yelpId: rest.id, 
           name: rest.name,
+          image: rest.image_url,
           address: rest.location.display_address.join(', '),
           categories: rest.categories.map(cat => cat.title),
           coordinates: {latitude: rest.coordinates.latitude, longitude: rest.coordinates.longitude}, 
@@ -61,11 +63,20 @@ function postNote(req, res) {
 
 function deleteNote(req, res) {
   Restaurant.findById(req.params.restId, function(err, rest) {
-    rest.notes.remove(req.params.noteId)
+    rest.notes.remove(req.params.noteId);
     rest.save();
     res.redirect('/favorites');
   });
 }
+
+function updateNote(req, res) {
+  Restaurant.findById(req.params.restId, function(err, rest) {
+    rest.notes[0].content = req.body.content;
+    rest.save();
+    res.redirect('/favorites');
+  });
+}
+
 
 module.exports = {
   show,
@@ -73,5 +84,6 @@ module.exports = {
   favorites,
   unlike,
   postNote,
-  deleteNote
+  deleteNote,
+  updateNote
 }
