@@ -17,7 +17,6 @@ var restaurantSchema = new Schema({
   reviewCount: Number,
   coordinates: {},
   notes: [noteSchema]
-
 });
 
 module.exports = mongoose.model('Restaurant', restaurantSchema);
