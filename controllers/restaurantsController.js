@@ -53,11 +53,18 @@ function favorites(req, res) {
 
 function postNote(req, res) {
   Restaurant.findById(req.params.id, function(err, rest) {
-    rest.notes.push({content: 'hi', user: req.user})
+    rest.notes.push({content: req.body.content})
     rest.save();
     res.redirect('/favorites');
   });
-  
+}
+
+function deleteNote(req, res) {
+  Restaurant.findById(req.params.restId, function(err, rest) {
+    rest.notes.remove(req.params.noteId)
+    rest.save();
+    res.redirect('/favorites');
+  });
 }
 
 module.exports = {
@@ -65,5 +72,6 @@ module.exports = {
   like,
   favorites,
   unlike,
-  postNote
+  postNote,
+  deleteNote
 }
