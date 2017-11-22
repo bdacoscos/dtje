@@ -20,6 +20,7 @@ router.get('/favorites', restaurantsController.favorites);
 router.post('/restaurants/:yelpId/like', restaurantsController.like);
 router.delete('/restaurants/:id/unlike', restaurantsController.unlike);
 router.post('/favorites/:id', restaurantsController.postNote);
+router.delete('/favorites/:restId/notes/:noteId', restaurantsController.deleteNote);
 
 
 /* Google OAuth */ 

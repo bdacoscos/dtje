@@ -19,13 +19,26 @@
         <%= restaurant.categories %></br> 
         <%= restaurant.price %></br> 
         <%= restaurant.rating %></br> 
+        <% if (restaurant.notes.length > 0) { %>
+          <%= restaurant.notes[0].content %></br> 
+        <% } %> 
         <img src=<%= restaurant.image_url %>>
         <form method="POST" action='/favorites/<%= restaurant.id %>'>
+          <input type="text" name="content">
           <button type="submit">Add Note</button>
         </form>
+        <div>
+          <% restaurant.notes.forEach(function(note) { %> 
+            <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
+              <button type="submit">Delete Note</button>
+            </form>
+          <% }); %>
+        </div>
+        
         <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
           <button type="submit">Unlike</button>
         </form>
+        
     <% }); %> 
   </div> 
 
