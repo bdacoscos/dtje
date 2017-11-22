@@ -51,9 +51,19 @@ function favorites(req, res) {
   });
 }
 
+function postNote(req, res) {
+  Restaurant.findById(req.params.id, function(err, rest) {
+    rest.notes.push({content: 'hi', user: req.user})
+    rest.save();
+    res.redirect('/favorites');
+  });
+  
+}
+
 module.exports = {
   show,
   like,
   favorites,
-  unlike
+  unlike,
+  postNote
 }

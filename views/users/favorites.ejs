@@ -20,6 +20,9 @@
         <%= restaurant.price %></br> 
         <%= restaurant.rating %></br> 
         <img src=<%= restaurant.image_url %>>
+        <form method="POST" action='/favorites/<%= restaurant.id %>'>
+          <button type="submit">Add Note</button>
+        </form>
         <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
           <button type="submit">Unlike</button>
         </form>

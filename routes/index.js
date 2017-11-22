@@ -15,10 +15,11 @@ router.get('/', function(req, res, next) {
 
 router.get('/show', restaurantsController.show);
 router.post('/show', restaurantsController.show);
-router.get('/favorites', restaurantsController.favorites); 
+router.get('/favorites', restaurantsController.favorites);
 
 router.post('/restaurants/:yelpId/like', restaurantsController.like);
 router.delete('/restaurants/:id/unlike', restaurantsController.unlike);
+router.post('/favorites/:id', restaurantsController.postNote);
 
 
 /* Google OAuth */ 
