@@ -9,7 +9,7 @@ function searchRestaurants(location) {
       'Authorization': 'Bearer ' + process.env.access_token
     }
   };
-  return request(options).then(function(restaurantData){
+  return request(options).then(function(restaurantData) {
     return JSON.parse(restaurantData).businesses;
   });
 }
@@ -20,8 +20,7 @@ function randomRestaurant(location) {
  });
 }
 
-
-function getRestaurantById(yelpId){
+function getRestaurantById(yelpId) {
   var options = {
     url: `${matchURL}/${yelpId}`,
     headers: {
@@ -32,7 +31,6 @@ function getRestaurantById(yelpId){
     return JSON.parse(restaurant); 
   });
 }
-
 
 module.exports = {
   searchRestaurants,
