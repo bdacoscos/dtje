@@ -48,6 +48,8 @@ function unlike(req, res){
 }
 
 function favorites(req, res) {
+  if (!req.user) return res.redirect('/'); // TODO - put this in middleware
+  console.log(req.user)
   req.user.populate('favorites', function(err, user) {
     res.render('users/favorites', { user }); 
   });
