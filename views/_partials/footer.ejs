@@ -1,21 +1,5 @@
   <!-- Using Underscore for collection manipulation and client-side templatin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-  <!-- JavaScript for Materialize -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <script>
-    function initMap() {
-      var thisPlace = {
-        lat: <%=restaurant.coordinates.latitude %>, lng: <%=restaurant.coordinates.longitude %>
-        }
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: thisPlace, zoom: 18
-      }
-      );
-      var marker = new google.maps.Marker({
-        position: thisPlace, map
-      })
-    }
-  </script>
 
   </body>
 </html>
