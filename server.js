@@ -16,6 +16,7 @@ var api = require('./routes/api');
 require('dotenv').config();
 
 var app = express();
+app.locals.mapKey = process.env.GOOGLE_MAPS;
 require('./config/db');
 require('./config/passport');
 
@@ -39,6 +40,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function(req, res, next) {
+  app.locals.user = req.user;
+  next();
+});
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/', api);
