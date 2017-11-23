@@ -15,6 +15,8 @@ var users = require('./routes/users');
 require('dotenv').config();
 
 var app = express();
+var api = require('./routes/api');
+// added when trying to refactor views:
 app.locals.mapKey = process.env.GOOGLE_MAPS;
 require('./config/db');
 require('./config/passport');
@@ -47,6 +49,7 @@ app.use(function(req, res, next) {
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
