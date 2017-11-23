@@ -6,7 +6,7 @@ function show(req, res, next) {
   //if no location, text field required? default LA?
   var location = req.body.location || req.query.location || req.user.location;
   yelp.randomRestaurant(location).then(function(restaurant) {
-    res.render('show', { user: req.user, restaurant, location, mapKey: process.env.GOOGLE_MAPS });
+    res.render('show', { user: req.user, restaurant, location });
   });
 }
 
@@ -47,7 +47,7 @@ function unlike(req, res) {
 }
 
 function favorites(req, res) {
-  if (!req.user) return res.redirect('/'); // TODO - put this in middleware
+  // if (!req.user) return res.redirect('/'); // TODO - put this in middleware
   req.user.populate('favorites', function(err, user) {
     res.render('users/favorites', { user }); 
   });

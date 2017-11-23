@@ -1,36 +1,27 @@
 <%- include('_partials/header') %>
 
-<a href="/" class="brand-logo left">Don't Think, Just Eat</a>
-<!-- new html below -->
-<ul class="right">
-  <% if (user) { %>
-    <li>
-      <a href="/logout">
-        <i class="material-icons left">trending_flat</i>Log Out</a>
-    </li>
-  <% } else { %>
-    <li>
-      <a href="/auth/google">
-        <i class="material-icons left">vpn_key</i>Login with Google</a>
-    </li>
-  <% } %>
-</ul>
+<div class="container">
 
-<div>
-  <a href="/show?location=<%= location %>">TRY AGAIN</a>
+      
+  <div>
+    <a href="/show?location=<%= location %>">TRY AGAIN</a>
+  </div>
+
+  <div>
+    <%= restaurant.name %></br>
+    <%= restaurant.categories[0].title %></br> 
+    <%= restaurant.price %></br> 
+    <%= restaurant.rating %></br> 
+    <%= restaurant.location.display_address.join(", ") %> </br> 
+    <img src=<%= restaurant.image_url %> height="80">
+  </div>
+
+  <form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
+    <button type="submit">Like</button>
+  </form>
+
+  <div id="map"></div>
+
 </div>
 
-<div>
-  <%= restaurant.name %></br>
-  <%= restaurant.categories[0].title %></br> 
-  <%= restaurant.price %></br> 
-  <%= restaurant.rating %></br> 
-  <%= restaurant.location.display_address.join(", ") %> </br> 
-  <img src=<%= restaurant.image_url %> height="80">
-</div>
-
-<form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
-  <button type="submit">Like</button>
-</form>
- 
 <%- include('_partials/footer') %>
