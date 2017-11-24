@@ -1,73 +1,75 @@
 <%- include('../_partials/header') %>
 
-<h1>User Show Page</h1>
-
-<%= user.name %>
-<img src=<%=user.avatar %>>
-<%= user.location %>
-  <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
-    <input type="text" name="location" value="<%= user.location %>">
-    <button type="submit">Update Location</button>
-  </form>
-
-<div>  
-  <% user.favorites.forEach(function(restaurant) { %> 
-    <div class="container"></div>
-      <%= restaurant.name %></br>
-      <%= restaurant.categories.join(', ') %></br> 
-      <%= restaurant.price %></br> 
-      <%= restaurant.rating %></br> 
-      <% if (restaurant.notes.length > 0) { %>
-        <%= restaurant.notes[0].content %></br> 
-      <% } %> 
-      <img src="<%= restaurant.image %>">
-      <form method="POST" action='/favorites/<%= restaurant.id %>'>
-        <input type="text" name="content">
-        <button type="submit">Add Note</button>
-      </form>
-      <div>
-        <% restaurant.notes.forEach(function(note) { %>
-          <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
-            <input type="text" name="content" value="<%= note.content %>">
-            <button type="submit">Update Note</button>
+<div class="container">
+  
+  <h1>Your Favorites</h1>
+  
+  <div class="row">
+    <div class="col s3">
+      <img src=<%=user.avatar %>>
+      <%= user.name %></br>
+      <%= user.location %>
+        <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
+          <input type="text" name="location" value="<%= user.location %>"> <!-- Remove value?  --> 
+          <button type="submit">Update Location</button>
+        </form>
+    </div>
+    <div class="col s9">
+      <% user.favorites.forEach(function(restaurant) { %>
+          <img src=<%= restaurant.image_url %>></br>
+          <%= restaurant.name %></br>
+          <%= restaurant.categories.join(', ') %></br> 
+          <%= restaurant.price %></br> 
+          <%= restaurant.rating %></br> 
+          <% if (restaurant.notes.length > 0) { %>
+            <%= restaurant.notes[0].content %></br> 
+          <% } %> 
+          <form method="POST" action='/favorites/<%= restaurant.id %>'>
+            <input type="text" name="content">
+            <button type="submit">Add Note</button>
           </form>
-          <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
-            <button type="submit">Delete Note</button>
+          <% restaurant.notes.forEach(function(note) { %>
+            <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
+              <input type="text" name="content" value="<%= note.content %>">
+              <button type="submit">Update Note</button>
+            </form>
+            <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
+              <button type="submit">Delete Note</button>
+            </form>
+          <% }); %>
+          <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
+            <button type="submit">Unlike</button>
           </form>
-        <% }); %>
+      <% }); %> 
+
+    <!-- Materialize Card code below -->  
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="images/office.jpg">
+        </div>
+
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">Card Title
+            <i class="material-icons right">more_vert</i>
+          </span>
+          <p>
+            <a href="#">This is a link</a>
+          </p>
+        </div>
+
+        <!-- Add Google Maps here, on the reveal? -->
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Card Title
+            <i class="material-icons right">close</i>
+            <div id="map"></div>
+          </span>
+          <p>Here is some more information about this product that is only revealed once clicked on.</p>
+        </div>
+
       </div>
-      <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
-        <button type="submit">Unlike</button>
-      </form>
-    </div>  
-  <% }); %> 
-</div> 
 
-  <div class="card">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="images/office.jpg">
     </div>
-
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">Card Title
-        <i class="material-icons right">more_vert</i>
-      </span>
-      <p>
-        <a href="#">This is a link</a>
-      </p>
-    </div>
-
-    <!-- Add Google Maps here -->
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title
-        <i class="material-icons right">close</i>
-        <div id="map"></div>
-      </span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-    </div>
-
   </div>
-
-
+</div>
 
 <%- include('../_partials/footer') %>
