@@ -19,10 +19,12 @@ function like(req, res) {
       }); 
     } else {
       yelp.getRestaurantById(req.params.yelpId).then(function(rest) {
+        console.log(rest);
         Restaurant.create({
           yelpId: rest.id, 
           name: rest.name,
           image: rest.image_url,
+          price: rest.price,
           address: rest.location.display_address.join(', '),
           categories: rest.categories.map(cat => cat.title),
           coordinates: {latitude: rest.coordinates.latitude, longitude: rest.coordinates.longitude}, 

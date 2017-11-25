@@ -9,3 +9,9 @@ a {
 .restaurant-card {
   margin-top: 50px;
 }
+
+
+#updateButton {
+  float: left;
+}
+
