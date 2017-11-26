@@ -6,7 +6,7 @@ function show(req, res, next) {
   //if no location, text field required? default LA?
   var location = req.body.location || req.query.location || req.user.location;
   yelp.randomRestaurant(location).then(function(restaurant) {
-    res.render('show', { user: req.user, restaurant, location, mapKey: process.env.GOOGLE_MAPS });
+    res.render('show', { user: req.user, restaurant, location }); // , mapKey: process.env.GOOGLE_MAPS 
   });
 }
 
