@@ -16,22 +16,9 @@
   <!-- jQuery (required by Materialize) -->
   <script defer src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-  <script defer src="/javascripts/app.js"></script>
-
-  <style>
-    #map {
-      height: 100%;
-    }
-  
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
 
 </head>
+
 <body>
 
   <nav>
@@ -49,66 +36,66 @@
                 <a href="/auth/google">
                   <i class="material-icons left">vpn_key</i>Login with Google</a>
               </li>
-              <% } %>
+            <% } %>
         </ul>
       </div>
     </div>
   </nav>
 
-<div class="container content-card">
-  
-  <div class="row">
-    <div class="col s6 center-align">
-      <form method="POST" action="/show?location=<%= location %>">
-        <button class="btn waves-effect waves-light" type="submit">
-          Try Again!
-          <i class="material-icons right">autorenew</i>
-        </button>
-      </form>
-    </div>
-    <div class="col s6 center-align">
-      <form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
-        <button class="btn waves-effect waves-light" type="submit" action='/restaurants/<%= restaurant.id %>/like'>
-          Add to Favorites
-          <i class="material-icons right">favorite</i>
-        </button>
-      </form>
-    </div>
-  </div>
+  <div class="container restaurant-card">
 
-  <div class="row">
-    <div class="col s12 center-align">
-      <div>
-        <h2><%= restaurant.name %></br></h2>
-        <h5><%= restaurant.categories[0].title %> | <%= restaurant.price %> | <%= restaurant.rating %></h5></br> 
-        <%= restaurant.location.display_address.join(", ") %> </br> 
-        <img src=<%= restaurant.image_url %> height="400">
-        <script>
-          function initMap() {
-            var thisPlace = {
-              lat:<%= restaurant.coordinates.latitude %>, lng: <%= restaurant.coordinates.longitude %>
-              }
-            var map = new google.maps.Map(document.getElementById('map'), {
-              center: thisPlace, zoom: 18
-            });
-            var marker = new google.maps.Marker({
-              position: thisPlace, map
-            });
-          }
-        </script>
+    <div class="row">
+      <div class="col s6 center-align">
+        <form method="POST" action="/show?location=<%= location %>">
+          <button class="btn waves-effect waves-light" type="submit">
+            Try Again!
+            <i class="material-icons right">autorenew</i>
+          </button>
+        </form>
+      </div>
+      <div class="col s6 center-align">
+        <form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
+          <button class="btn waves-effect waves-light" type="submit" action='/restaurants/<%= restaurant.id %>/like'>
+            Add to Favorites
+            <i class="material-icons right">favorite</i>
+          </button>
+        </form>
       </div>
     </div>
-  </div>
 
-  <div class="row">  
+    <div class="row">
+      <div class="col s12 center-align">
+        <div>
+          <h2>
+            <%= restaurant.name %></br>
+          </h2>
+          <h5>
+            <%= restaurant.categories[0].title %> |
+            <%= restaurant.price %> |
+            <%= restaurant.rating %></br>
+          </h5>
+            <%= restaurant.location.display_address.join(", ") %></br>
+            <img src=<%= restaurant.image_url %> height="400">
+        </div>
+      </div>
+    </div>
+
     <div id="map"></div>
-  </div>  
-  
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= mapKey%>&callback=initMap" async defer></script>
+    
+    <script>
+      function initMap() {
+        var thisPlace = { lat: <%= restaurant.coordinates.latitude %>, lng: <%= restaurant.coordinates.longitude %> }
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: thisPlace,
+          zoom: 18
+        });
+        var marker = new google.maps.Marker({
+          position: thisPlace,
+          map
+        });
+      }
+    </script>
 
-<!-- Using Underscore for collection manipulation and client-side templatin -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&callback=initMap" async defer></script>
 </body>
-
 </html>
