@@ -16,6 +16,8 @@
     </div>
     <div class="col s9">
       <% user.favorites.forEach(function(restaurant) { %>
+
+
           <img src=<%= restaurant.image %> height="250"></br>
           <%= restaurant.name %></br>
           <%= restaurant.categories.join(', ') %></br> 
@@ -52,22 +54,22 @@
       <% }); %> 
   
 
-    <!-- Materialize Card code below -->  
+      <!-- Materialize Card code below -->  
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="images/office.jpg">
+          <img class="activator" src="images/office.jpg"> <!-- add restaurant image here -->
         </div>
 
         <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">Card Title
+          <span class="card-title activator grey-text text-darken-4">Card Title <!-- restaurant name here -->
             <i class="material-icons right">more_vert</i>
           </span>
           <p>
-            <a href="#">This is a link</a>
+            <a href="#">This is a link</a> <!-- "Go Here" button? -->
           </p>
         </div>
 
-        <!-- Add Google Maps here, on the reveal? -->
+        <!-- Add notes on the reveal? -->
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">Card Title
             <i class="material-icons right">close</i>
@@ -75,7 +77,6 @@
           </span>
           <p>Here is some more information about this product that is only revealed once clicked on.</p>
         </div>
-
       </div>
 
     </div>

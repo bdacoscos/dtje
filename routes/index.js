@@ -8,7 +8,7 @@ const reviewURL = 'https://api.yelp.com/v3/businesses'
 const rootURL = 'https://api.yelp.com/v3/businesses/search'
 var restaurantsController = require('../controllers/restaurantsController');
 
-// landing page: isLoggedIn,
+/* Landing Page */
 router.get('/', function(req, res, next) {
   res.render('index', {user: req.user});
 });
