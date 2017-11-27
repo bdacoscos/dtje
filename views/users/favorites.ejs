@@ -39,19 +39,19 @@
             </form>
           </div>
           <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">close</i></span>    
+            <span class="card-title grey-text text-darken-4 fancy-font"><%=restaurant.name%><i class="material-icons right">close</i></span>    
             <p><%= restaurant.categories.join(', ') %></p>
-            <%= restaurant.price %> 
+            Price: <%= restaurant.price %>&nbsp;&nbsp;|&nbsp;&nbsp;
             Rated <%= restaurant.rating %>/5 by <%=restaurant.reviewCount %> Users
             <div>
               <% restaurant.notes.forEach(function(note) { %>
                 <% if (note.user.equals(user._id)) { %>
                   <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
-                    <input type="text" name="content" value="<%= note.content %>">
-                    <button id="update-button" type="submit" class="waves-effect waves-light btn">Update Note</button>
+                    <input id="note-content" type="text" name="content" value="<%= note.content %>">
+                    <button id="update-button" type="submit" class="waves-effect waves-light btn light-blue darken-3">Update Note</button>
                   </form>
                   <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
-                    <button type="submit" class="waves-effect waves-light btn">Delete Note</button>
+                    <button type="submit" class="waves-effect waves-light btn-flat color-red">Delete Note</button>
                   </form>
                 <% } %>
               <% }); %>

@@ -141,3 +141,7 @@ body {
 .weight-800 {
   font-weight: 800;
 }
+
+#note-content {
+  padding-top: 50px;
+}
