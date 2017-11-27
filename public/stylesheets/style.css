@@ -79,7 +79,7 @@ body {
 }
 
 .profile {
-  width: 170px;
+  width: 185px;
   margin: 0 auto;
   text-align: center;
   margin-bottom: 50px;
@@ -89,4 +89,22 @@ body {
   width: 50px;
   border: 1px solid black;
   border-radius: 50px;
+}
+
+#show-picture {
+  border: 1px solid black;
+  border-radius: 2px;
+  height: 360px;
+}
+
+.show-info {
+  margin-top: 50px;
+}
+
+.address {
+  margin-bottom: 10px;
+}
+
+.modal-content {
+  color: black;
 }
