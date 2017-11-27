@@ -24,10 +24,15 @@
   <nav>
     <div class="nav-wrapper orange darken-4">
       <div class="container">
-        <img src="https://i.imgur.com/qFlrAww.png" alt="" id="little-logo">
-        <a href="/" class="brand-logo left">Don't Think, Just Eat</a>
+        <a href="/" class="brand-logo left">
+          <img src="https://i.imgur.com/s66rJSv.png" alt="" id="little-logo">          
+        </a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <% if (user) { %>
+            <li>
+              <a href="/favorites">
+                <i class="material-icons left">favorite</i>My Favorites</a>
+            </li>
             <li>
               <a href="/logout">
                 <i class="material-icons left">trending_flat</i>Log Out</a>
