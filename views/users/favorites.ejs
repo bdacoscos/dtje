@@ -58,6 +58,7 @@
                   <%=restaurant.reviewCount %> Users
                     <div>
                       <% restaurant.notes.forEach(function(note) { %>
+                        <% if (note.user.equals(user._id)) { %>
                         <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
                           <input type="text" name="content" value="<%= note.content %>">
                           <button id="update-button" type="submit" class="waves-effect waves-light btn">Update Note</button>
@@ -65,6 +66,7 @@
                         <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
                           <button type="submit" class="waves-effect waves-light btn">Delete Note</button>
                         </form>
+                        <% } %>
                         <% }); %>
                     </div>
             </div>
