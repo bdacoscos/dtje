@@ -72,9 +72,8 @@ function deleteNote(req, res) {
 }
 
 function updateNote(req, res) {
-  console.log('UPDATE NOTE CONTROLLER')
   Restaurant.findById(req.params.restId, function(err, rest) {
-    rest.notes[0].content = req.body.content;
+    rest.notes.find(n => n.id === req.params.noteId).content = req.body.content;
     rest.save();
     res.redirect('/favorites');
   });

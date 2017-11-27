@@ -1,12 +1,14 @@
 <%- include('../_partials/header') %>
 <div class="container">
-<%= user.name %>
+<div class="profile">
+  <%= user.name %>
 <img src=<%=user.avatar %>>
 <%= user.location %>
   <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
     <input type="text" name="location" value="<%= user.location %>">
     <button type="submit">Update Location</button>
   </form>
+</div>
 
 <div class="row">  
   <% user.favorites.forEach(function(restaurant) { %> 
