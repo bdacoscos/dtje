@@ -1,6 +1,7 @@
 # Don't Think, Just Eat 
 > Don't Think Just Eat allows users to select a restaurant within their specified  location. Users are able to bookmark their favorite restaurants they've visited and save notes for future reference. 
 ><img src="https://i.imgur.com/mLSAsPD.jpg">
+><img src="https://i.imgur.com/z18pqTH.jpg">
 
 
 # Technologies Used
@@ -25,8 +26,9 @@ We would like to add the following features:
 * Integrate Postmates API for delivery 
 * Filter restaurants in favorites by category 
 
+# DTJE API
 
-
+<img src="https://i.imgur.com/5be90aO.png">
 
 
 # Trello 
