@@ -27,9 +27,11 @@ We would like to add the following features:
 * Filter restaurants in favorites by category 
 
 # DTJE API
+This is all of the restaurants that our users have favorited through our app.
 
-<img src="https://i.imgur.com/5be90aO.png">
+Endpoint:
 
+>GET https://dtje.herokuapp.com/api/restaurants
 
 # Trello 
 * <a href="https://trello.com/b/Xs6T3thR/project-3">DTJE - Trello </a>
