@@ -3,24 +3,23 @@
   <div id="home" class="container center-align black-box position-abs">
     <div class="row">
       <div class="col s12 center-align">
-        <div>
-          <h3>
-            <%= restaurant.name %></br>
-          </h3>
-          <div class="col s4 center-align">
+        <h3>
+          <%= restaurant.name %></br>
+        </h3>
+      </div>
+    </div>
+    <div class="row center-align">
+      <div class="col s4 right-align">
         <form method="POST" action="/show?location=<%= location %>">
-          <button class="btn waves-effect waves-light" type="submit">
+          <button class="btn waves-effect waves-light light-blue darken-3" type="submit">
             Try Again!
             <i class="material-icons right">autorenew</i>
           </button>
         </form>
       </div>
       <div class="col s4 center-align">
-        <a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="mapRefresh()">Go!</a>              
-      </div>
-      <div class="col s4 center-align">
         <form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
-          <button class="btn waves-effect waves-light" type="submit" action='/restaurants/<%= restaurant.id %>/like'>
+          <button class="btn waves-effect waves-light light-blue darken-3" type="submit" action='/restaurants/<%= restaurant.id %>/like'>
             Add to Favorites
             <i class="material-icons right">favorite</i>
           </button>
@@ -35,8 +34,24 @@
             <%= restaurant.location.display_address.join(", ") %></br>
           </div>
         </div>
+      <div class="col s4 left-align">
+        <a class="waves-effect waves-light btn light-blue darken-3 modal-trigger" href="#modal1" onclick="mapRefresh()">Get Directions!</a>              
       </div>
+    </div>  
+
+    <div>
+      <h5 class="show-info">
+        <%= restaurant.categories[0].title %>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <%= restaurant.price %>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <%= restaurant.rating %>/5 Stars
+      </h5>
+      <div class="address">
+        <%= restaurant.location.display_address.join(", ") %>
+      </div>
+      <img id="show-picture" src=<%= restaurant.image_url %> height="400">
     </div>
+        
+
     <div id="modal1" class="modal">
       <div class="modal-content">
         <h4><%= restaurant.name %></h4>
