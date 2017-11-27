@@ -18,10 +18,14 @@ function show(req, res, next) {
 function like(req, res) {
   Restaurant.findOne({ yelpId: req.params.yelpId }, function(err, restaurant) {
     if (restaurant) {
+      if (req.user.favorites.indexOf(restaurant._id) === -1) {
       req.user.favorites.push(restaurant._id);
       req.user.save(function(err) {
-        res.redirect('/favorites')
-      }); 
+        res.redirect('/favorites');
+      });
+    } else {
+        res.redirect('/favorites');
+    }
     } else {
       yelp.getRestaurantById(req.params.yelpId).then(function(rest) {
         console.log(rest);
