@@ -1,13 +1,17 @@
 <%- include('../_partials/header') %>
 <div class="container content-card">
 <div class="profile">
-  <%= user.name %>
-<img src=<%=user.avatar %>>
-<%= user.location %>
+<div id="profile-picture">
+  <img id="avatar"src=<%=user.avatar %>>
+</div>
+<p><%= user.name %></p>
+<p><%= user.location %></p>
+<div>
   <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
-    <input type="text" name="location" value="<%= user.location %>">
+    <input type="text" name="location" placeholder="Edit your default location">
     <button type="submit">Update Location</button>
   </form>
+</div>
 </div>
 
 <div class="row">  
