@@ -31,6 +31,7 @@
           <%= restaurant.price %> 
           Rated <%= restaurant.rating %>/5 by <%=restaurant.reviewCount %> Users
           <div>
+
               <% restaurant.notes.forEach(function(note) { %>
                 <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
                   <input type="text" name="content" value="<%= note.content %>">
@@ -44,8 +45,6 @@
         </div>
         </div>
       </div>
-
-     
 
   <% }); %> 
 </div> 
