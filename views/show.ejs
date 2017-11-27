@@ -15,8 +15,8 @@
           </button>
         </form>
       </div>
-          <div class="col s4 center-align">
-              <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Go!</a>              
+      <div class="col s4 center-align">
+        <a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="mapRefresh()">Go!</a>              
       </div>
       <div class="col s4 center-align">
         <form method="POST" action='/restaurants/<%= restaurant.id %>/like'>
@@ -44,21 +44,34 @@
         <div id="map"></div>
       </div>
     </div>
-
     
     <script>
       function initMap() {
         var thisPlace = { lat: <%= restaurant.coordinates.latitude %>, lng: <%= restaurant.coordinates.longitude %> }
         var map = new google.maps.Map(document.getElementById('map'), {
           center: thisPlace,
-          zoom: 18
+          zoom: 15
         });
         var marker = new google.maps.Marker({
           position: thisPlace,
           map
         });
       }
+
+      function mapRefresh() {
+        var modal = document.getElementById('modal1');
+        modal1.style.visibility = 'visible';
+        modal1.style.zIndex = 1003;
+
+        setTimeout(function() {
+          var map = document.getElementById('map');
+          google.maps.event.trigger(map, 'resize');
+        }, 0);
+      }
     </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&callback=initMap" async defer></script>
+    <script src="/javascripts/app.js"></script>
+
   </div>
   <%- include('_partials/footer') %>

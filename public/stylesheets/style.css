@@ -14,8 +14,12 @@ a {
 }
 
 
-#updateButton {
+#update-button {
   float: left;
+}
+
+#unlike-button {
+  float: right;
 }
 
 /***************************************************
@@ -70,7 +74,6 @@ body {
   color: white;
   background: rgba(0, 0, 0, 0.5);
   padding: 2px 20px;
-  
 }
 
 .position-rel {
@@ -82,10 +85,11 @@ body {
 }
 
 .profile {
-  width: 185px;
+  width: 500px;
   margin: 0 auto;
   text-align: center;
   margin-bottom: 50px;
+  padding: 20px;
 }
 
 #avatar {
@@ -110,4 +114,22 @@ body {
 
 .modal-content {
   color: black;
+}
+
+.modal {
+  visibility: hidden;
+  display: block;
+  z-index: -1;
+}
+
+.color-red {
+  color: red;
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+.margin-top {
+  margin-top: 10px;
 }
