@@ -1,56 +1,58 @@
 <%- include('../_partials/header') %>
-<div class="container">
-<div class="profile">
-  <%= user.name %>
-<img src=<%=user.avatar %>>
-<%= user.location %>
-  <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
-    <input type="text" name="location" value="<%= user.location %>">
-    <button type="submit">Update Location</button>
-  </form>
+
+<div id="home" class="container center-align black-box position-abs">
+  <div class="profile">
+    <%= user.name %>
+  <img src=<%=user.avatar %>>
+  <%= user.location %>
+    <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
+      <input type="text" name="location" value="<%= user.location %>">
+      <button type="submit">Update Location</button>
+    </form>
+  </div>
+
+  <div class="row center-align">  
+    <% user.favorites.forEach(function(restaurant) { %> 
+      <div class="col s12 m6">        
+      <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="<%= restaurant.image %>">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">more_vert</i></span>
+            <form method="POST" action='/favorites/<%= restaurant.id %>'>
+              <input type="text" name="content">
+              <button type="submit">Add Note</button>
+            </form>
+            <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
+              <button type="submit">Unlike</button>
+            </form>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">close</i></span>    
+            <p><%= restaurant.categories.join(', ') %></p>
+            <%= restaurant.price %> 
+            Rated <%= restaurant.rating %>/5 by <%=restaurant.reviewCount %> Users
+            <div>
+
+                <% restaurant.notes.forEach(function(note) { %>
+                  <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
+                    <input type="text" name="content" value="<%= note.content %>">
+                    <button id="updateButton" type="submit">Update Note</button>
+                  </form>
+                  <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
+                    <button type="submit">Delete Note</button>
+                  </form>
+                <% }); %>
+              </div>
+          </div>
+          </div>
+        </div>
+
+    <% }); %> 
+  </div> 
 </div>
 
-<div class="row">  
-  <% user.favorites.forEach(function(restaurant) { %> 
-    <div class="col s12 m6">        
-    <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="<%= restaurant.image %>">
-        </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">more_vert</i></span>
-          <form method="POST" action='/favorites/<%= restaurant.id %>'>
-            <input type="text" name="content">
-            <button type="submit">Add Note</button>
-          </form>
-          <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
-            <button type="submit">Unlike</button>
-          </form>
-        </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">close</i></span>    
-          <p><%= restaurant.categories.join(', ') %></p>
-          <%= restaurant.price %> 
-          Rated <%= restaurant.rating %>/5 by <%=restaurant.reviewCount %> Users
-          <div>
-
-              <% restaurant.notes.forEach(function(note) { %>
-                <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
-                  <input type="text" name="content" value="<%= note.content %>">
-                  <button id="updateButton" type="submit">Update Note</button>
-                </form>
-                <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
-                  <button type="submit">Delete Note</button>
-                </form>
-              <% }); %>
-            </div>
-        </div>
-        </div>
-      </div>
-
-  <% }); %> 
-</div> 
-</div>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&callback=initMap" async defer></script>
 
 <%- include('../_partials/footer') %>
