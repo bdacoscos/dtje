@@ -1,79 +1,54 @@
 <%- include('../_partials/header') %>
+<div class="container">
+<%= user.name %>
+<img src=<%=user.avatar %>>
+<%= user.location %>
+  <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
+    <input type="text" name="location" value="<%= user.location %>">
+    <button type="submit">Update Location</button>
+  </form>
 
-<div class="container content-card">
-  
-  
-  <div class="row">
-    <div class="col s3">
-      <img src=<%=user.avatar %>>
-      <%= user.name %></br>
-      <%= user.location %>
-      <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
-        <input type="text" name="location" value="<%= user.location %>"> <!-- Remove value?  --> 
-        <button type="submit">Update Location</button>
-      </form>
-    </div>
+<div class="row">  
+  <% user.favorites.forEach(function(restaurant) { %> 
+    <div class="col s12 m6">        
+    <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="<%= restaurant.image %>">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">more_vert</i></span>
+          <form method="POST" action='/favorites/<%= restaurant.id %>'>
+            <input type="text" name="content">
+            <button type="submit">Add Note</button>
+          </form>
+          <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
+            <button type="submit">Unlike</button>
+          </form>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">close</i></span>    
+          <p><%= restaurant.categories.join(', ') %></p>
+          <%= restaurant.price %> 
+          Rated <%= restaurant.rating %>/5 by <%=restaurant.reviewCount %> Users
+          <div>
 
-    <div class="col s9">
-      <h1>Your Favorites</h1>
-
-      <% user.favorites.forEach(function(restaurant) { %>
-        <!-- Materialize Card code below -->
-        <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img src=<%= restaurant.image %> ><!-- add restaurant image here -->
-            <span class="card-title grey-text text-darken-4">
-              <!-- restaurant name here -->
-              <%= restaurant.name %></br>
-              <%= restaurant.categories.join(', ') %>
-            </span>
-          </div>
-        
-          <div class="card-content">
-            <p>
-              <%= restaurant.price %></br> 
-              Rated <%= restaurant.rating %>/5 by <%=restaurant.reviewCount %> Users </br>
-              <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
-                <button type="submit">Unlike</button>
-              </form>
-      
-              <!-- <% if (restaurant.notes.length > 0) { %>
-                <%= restaurant.notes[0].content %></br> 
-              <% } %>  --> <!-- Looks Better Without This --> 
-      
-      
-              <!-- Could we wrap these comments in a neat little container?--> 
-              <form method="POST" action='/favorites/<%= restaurant.id %>'>
-                <input type="text" name="content">
-                <button type="submit">Add Note</button>
-              </form>
-              <div class="commentButtons"
               <% restaurant.notes.forEach(function(note) { %>
                 <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
                   <input type="text" name="content" value="<%= note.content %>">
                   <button id="updateButton" type="submit">Update Note</button>
                 </form>
                 <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
-                  <button id="deleteButton" type="submit">Delete Note</button>
+                  <button type="submit">Delete Note</button>
                 </form>
               <% }); %>
-              </div> 
-            </p>
-          </div>
-
-          <div class="card-action">
-            <a href="#">This is a link to nowhere</a>
-          </div>
-        
+            </div>
         </div>
+        </div>
+      </div>
 
-      <% }); %> 
-  
-
-      
-
-    </div>
-  </div>
+  <% }); %> 
+</div> 
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&callback=initMap" async defer></script>
 
 <%- include('../_partials/footer') %>
