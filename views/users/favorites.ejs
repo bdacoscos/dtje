@@ -1,59 +1,65 @@
 <%- include('../_partials/header') %>
 <div class="container content-card">
-<div class="profile">
-<div>
-  <img id="avatar"src=<%=user.avatar %>>
-</div>
-<p><%= user.name %></p>
-<p><%= user.location %></p>
-<div>
-  <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
-    <input type="text" name="location" placeholder="Edit your default location">
-    <button type="submit">Update Location</button>
-  </form>
-</div>
-</div>
-
-<div class="row">  
-  <% user.favorites.forEach(function(restaurant) { %> 
-    <div class="col s12 m6">        
-    <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="<%= restaurant.image %>">
+  <div class="row">
+    <div class="col s3"></div>
+    <div class="col s6">
+      <div class="profile black-box">
+        <div>
+          <img id="avatar"src=<%=user.avatar %>>
         </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">more_vert</i></span>
-          <form method="POST" action='/favorites/<%= restaurant.id %>'>
-            <input type="text" name="content">
-            <button type="submit">Add Note</button>
-          </form>
-          <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
-            <button type="submit">Unlike</button>
+        <h3 class="margin-top"><%= user.name %></h3>
+        <h5><%= user.location %></h5>
+        <div>
+          <form method="POST" action='/users/<%= user.id %>?_method=PUT'>
+            <input class="opacity" type="text" name="location" placeholder="Edit your default location">
+            <button type="submit" class="waves-effect waves-light btn light-blue darken-3">Update Location</button>
           </form>
         </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">close</i></span>    
-          <p><%= restaurant.categories.join(', ') %></p>
-          <%= restaurant.price %> 
-          Rated <%= restaurant.rating %>/5 by <%=restaurant.reviewCount %> Users
-          <div>
+      </div>
+    </div>
+    <div class="col s3"></div>
+  </div>
 
+  <div class="row">  
+    <% user.favorites.forEach(function(restaurant) { %> 
+      <div class="col s12 m6">        
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="<%= restaurant.image %>">
+          </div>
+          <div class="card-content">
+            <span id="unlike-button">
+              <form method="POST" action='/restaurants/<%= restaurant.id %>/unlike?_method=DELETE'>
+                <button type="submit" class="waves-effect waves-light btn-flat color-red">Unlike</button>
+              </form>
+            </span>
+            <span class="card-title activator grey-text text-darken-4"><%=restaurant.name%></span>
+            <form method="POST" action='/favorites/<%= restaurant.id %>'>
+              <input class="opacity" type="text" name="content" value="Thoughts?">
+              <button type="submit" class="waves-effect waves-light btn light-blue darken-3">Add Note</button>
+            </form>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><%=restaurant.name%><i class="material-icons right">close</i></span>    
+            <p><%= restaurant.categories.join(', ') %></p>
+            <%= restaurant.price %> 
+            Rated <%= restaurant.rating %>/5 by <%=restaurant.reviewCount %> Users
+            <div>
               <% restaurant.notes.forEach(function(note) { %>
                 <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=PUT'>
                   <input type="text" name="content" value="<%= note.content %>">
-                  <button id="updateButton" type="submit">Update Note</button>
+                  <button id="update-button" type="submit" class="waves-effect waves-light btn">Update Note</button>
                 </form>
                 <form method="POST" action='/favorites/<%= restaurant.id %>/notes/<%= note._id %>?_method=DELETE'>
-                  <button type="submit">Delete Note</button>
+                  <button type="submit" class="waves-effect waves-light btn">Delete Note</button>
                 </form>
               <% }); %>
             </div>
-        </div>
+          </div>
         </div>
       </div>
-
-  <% }); %> 
-</div> 
+    <% }); %> 
+  </div> 
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&callback=initMap" async defer></script>
 
