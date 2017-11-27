@@ -131,9 +131,13 @@ body {
 }
 
 .margin-top {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .fancy-font {
-  font-family: 'Berkshire Swash', cursive;
+  font-family: 'Playfair Display', serif;
+}
+
+.weight-800 {
+  font-weight: 800;
 }
